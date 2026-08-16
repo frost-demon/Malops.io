@@ -176,6 +176,7 @@ LABEL 7:
 ![Question 05 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs5-Disassembly-View.png)
 
 ---
+Qs6. What is the name of the function called last within init_module to hide the rootkit itself?
 
 
 
