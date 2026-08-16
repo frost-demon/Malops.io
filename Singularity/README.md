@@ -13,6 +13,15 @@ Qs1. What is the SHA256 hash of the sample?
 
 ---
 Qs2. What is the name of the primary initialization function called when the module is loaded?
+
+**Answer:**
+
 ```text
 init_module
 ```
+
+**Artifact:**
+
+![Question 02 Artifact](Artifacts/Malops-CTF-Singularity-Qs2.png)
+
+---
