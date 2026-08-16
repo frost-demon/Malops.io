@@ -1,4 +1,4 @@
----
+```markdown
 Qs1. What is the SHA256 hash of the sample?
 **Answer:**
 ```text
