@@ -25,3 +25,12 @@ init_module
 ![Question 02 Artifact](Artifacts/Malops-CTF-Singularity-Qs2.png)
 
 ---
+Qs3. How many distinct feature-initialization functions are called within above mentioned function?
+
+**Answer:**
+
+```text
+15
+```
+
+---
