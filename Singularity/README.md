@@ -61,7 +61,7 @@ int _cdecl singularity_init()
 }
 ```
 
-** Disassembly View **
+**Disassembly View:**
 
 ![Question 02 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs2-Disassembly-View.png)
 
