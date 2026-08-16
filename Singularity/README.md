@@ -24,7 +24,7 @@ init_module
 
 ```text
 // Alternative name is 'init_module'
-int _cdecl singularity_init()
+int __cdecl singularity_init()
 {
   int v0; // ebx
   int v1; // ebx
@@ -86,7 +86,7 @@ zer0t
 **Decompiled Pseudocode:**
 
 ```text
-int cdecl reset_tainted_init()
+int __cdecl reset_tainted_init()
 {
   kprobe_opcode_t *addr; // rbx
   task_struct *v1; // rax
@@ -140,41 +140,34 @@ Qs5. The add_hidden_pid function has a hardcoded limit. What is the maximum numb
 **Decompiled Pseudocode:**
 
 ```text
-int cdecl reset_tainted_init()
+void __fastcall add_hidden_pid(int pid)
 {
-  kprobe_opcode_t *addr; // rbx
-  task_struct *v1; // rax
-  task_struct *v2; // rbx
-  int pid; // edi
+  int v1; // ecx
+  __int64 v2; // rsi
+  int *v3; // rax
 
-  if ( (int)register_kprobe(a1: &probe_lookup) < 0
-    || (addr = probe_lookup.addr, unregister_kprobe(a1: &probe_lookup), addr == nullptr) )
-  {
-    taint_mask_ptr = nullptr;
-    goto LABEL_7;
-  }
-    taint_mask_ptr = (unsigned __int64 *)((__int64 (__fastcall *)(const char *))addr)(a1: "tainted_mask");
-    if ( taint_mask_ptr == nullptr )
+  v1 = hidden_count;
+  v2 = hidden_count;
+  if ( hidden_count <= 0 )
   {
 LABEL 7:
-    LODWORD(v1) = -14;
-    return (int)v1;
-  }
-  v1 = (task_struct *)kthread_create_on_node(a1: zt_thread, a2: 0, a3: 0xFFFFFFFFLL, a4: "zer0t");
-  v2 = v1;
-  if ( (unsigned __int64)v1 > 0xFFFFFFFFFFFFF000LL )
-  {
-    cleaner_thread = v1;
+    hidden_pids [v2] = pid;
+    hidden_count = v1 + 1;
   }
   else
   {
-    wake_up_process(a1: v1);
-    pid = v2->pid;
-    cleaner_thread = v2;
-    add_hidden_pid(pid);
-    LODWORD(v1) = 0;
+    v2 = hidden_count;
+    v3 = hidden_pids;
+    while ( *v3 != pid )
+    {
+      if ( ++v3 == &hidden_pids[hidden_count] )
+      {
+        if ( hidden_count == 32 )
+          return;
+        goto LABEL_7;
+      }
+    }
   }
-  return (int)v1;
 }
 ```
 
