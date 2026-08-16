@@ -129,8 +129,60 @@ LABEL 7:
 ![Question 04 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs4-Disassembly-View.png)
 
 ---
+Qs5. The add_hidden_pid function has a hardcoded limit. What is the maximum number of PIDs the rootkit can hide?
 
+**Answer:**
 
+```text
+32
+```
+
+**Decompiled Pseudocode:**
+
+```text
+int cdecl reset_tainted_init()
+{
+  kprobe_opcode_t *addr; // rbx
+  task_struct *v1; // rax
+  task_struct *v2; // rbx
+  int pid; // edi
+
+  if ( (int)register_kprobe(a1: &probe_lookup) < 0
+    || (addr = probe_lookup.addr, unregister_kprobe(a1: &probe_lookup), addr == nullptr) )
+  {
+    taint_mask_ptr = nullptr;
+    goto LABEL_7;
+  }
+    taint_mask_ptr = (unsigned __int64 *)((__int64 (__fastcall *)(const char *))addr)(a1: "tainted_mask");
+    if ( taint_mask_ptr == nullptr )
+  {
+LABEL 7:
+    LODWORD(v1) = -14;
+    return (int)v1;
+  }
+  v1 = (task_struct *)kthread_create_on_node(a1: zt_thread, a2: 0, a3: 0xFFFFFFFFLL, a4: "zer0t");
+  v2 = v1;
+  if ( (unsigned __int64)v1 > 0xFFFFFFFFFFFFF000LL )
+  {
+    cleaner_thread = v1;
+  }
+  else
+  {
+    wake_up_process(a1: v1);
+    pid = v2->pid;
+    cleaner_thread = v2;
+    add_hidden_pid(pid);
+    LODWORD(v1) = 0;
+  }
+  return (int)v1;
+}
+```
+
+**Disassembly View:**
+
+![Question 05 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs5-Disassembly-View.png)
+
+---
 
 
 
