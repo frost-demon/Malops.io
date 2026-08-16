@@ -20,7 +20,7 @@ Qs2. What is the name of the primary initialization function called when the mod
 init_module
 ```
 
-** Decompiled Pseudocode **
+**Decompiled Pseudocode:**
 
 ```text
 // Alternative name is 'init_module'
