@@ -178,6 +178,7 @@ LABEL 7:
 ---
 Qs6. What is the name of the function called last within init_module to hide the rootkit itself?
 
+**Answer:**
 
 
 
