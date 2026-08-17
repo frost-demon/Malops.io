@@ -180,7 +180,15 @@ Qs6. What is the name of the function called last within init_module to hide the
 
 **Answer:**
 
+```text
+module_hide_current
+```
 
+**Disassembly View:**
 
+![Question 02 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs2-Disassembly-View.png)
+
+---
+Qs7. 
 
 
