@@ -241,7 +241,13 @@ Now byte-swap the value to convert it from network byte order:
 ![Question 07 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs7-Disassembly-View.png)
 
 ---
+Qs8. What is the hardcoded "magic word" string, checked for by the privilege escalation module?
 
+**Answer:**
+
+```text
+
+```
 
 
 
