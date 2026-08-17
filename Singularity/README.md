@@ -222,7 +222,15 @@ __int64 __fastcall hooked_tcp4_seq_show(seq_file *seq, void *v)
 }
 ```
 
-Network protocols store port numbers in Network Byte Order (Big-Endian). When analyzing the value 0xA146 on a little-endian system, the bytes must be swapped to obtain the correct host-order value:
+Port numbers are stored in Network Byte Order (Big-Endian). In reverse engineering tools such as IDA, a 16-bit port value may sometimes appear as a signed integer, which is why -24250 is displayed instead of its unsigned representation.
+
+Convert the signed value to its unsigned 16-bit equivalent:
+
+```text
+-24250 + 65536 = 41286 = 0xA146
+```
+
+Now byte-swap the value to convert it from network byte order:
 
 ```text
 0xA146 → Byte Swap → 0x46A1 → Decimal → 18081
