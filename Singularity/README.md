@@ -189,6 +189,52 @@ module_hide_current
 ![Question 02 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs2-Disassembly-View.png)
 
 ---
-Qs7. 
+Qs7. The TCP port hiding module is initialized. What is the hardcoded port number it is configured to hide (decimal)?
+
+**Answer:**
+
+```text
+18081
+```
+
+**Decompiled Pseudocode:**
+
+```text
+__int64 __fastcall hooked_tcp4_seq_show(seq_file *seq, void *v)
+{
+  int v3; // r12d
+  __int16 v4; // r14
+  __int16 v6; // r13
+  int v7; // r12d
+
+  if ( v == (char *)&_UNIQUE_ID___addressable_trace_pid_cleanup878 + 1 )
+    return orig_tcp4_seq_show(a1: seq, a2: (char *)&_UNIQUE_ID___addressable_trace_pid_cleanup878 + 1);
+  v3 = *((_DWORD *)v + 198);
+  v4 = *((_WORD *)v + 6);
+  v6 = *((_WORD *)v + 399);
+  if ( v3 == (unsigned int)in_aton(a1: "192.168.5.128") )
+    return 0;
+  v7 = *(_DWORD *)v;
+  if ( v7 == (unsigned int)in_aton(a1: "192.168.5.128") || v6 == -24250 || v4 == -24250 )
+    return 0;
+  else
+    return orig_tcp4_seq_show(a1: seq, a2: v);
+}
+```
+
+Network protocols store port numbers in Network Byte Order (Big-Endian). When analyzing the value 0xA146 on a little-endian system, the bytes must be swapped to obtain the correct host-order value:
+
+```text
+0xA146 → Byte Swap → 0x46A1 → Decimal → 18081
+```
+
+**Disassembly View:**
+
+
+
+
+
+
+
 
 
