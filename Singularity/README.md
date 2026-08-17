@@ -238,6 +238,9 @@ Now byte-swap the value to convert it from network byte order:
 
 **Disassembly View:**
 
+![Question 07 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs7-Disassembly-View.png)
+
+---
 
 
 
