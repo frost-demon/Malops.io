@@ -370,10 +370,6 @@ Qs9. How many hooks, in total, does the become_root_init function install to ena
 10
 ```
 
-**Disassembly View:**
-
-![Question 09 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs8-Installed-Hooks-Disassembly-View.png)
-
 ---
 Qs10. What is the hardcoded IPv4 address of the C2 server?
 
