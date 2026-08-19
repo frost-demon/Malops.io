@@ -264,6 +264,35 @@ Qs8. What is the hardcoded "magic word" string, checked for by the privilege esc
 babyelephant
 ```
 
+**Findings:**
+
+**Step 1** — Identify the privilege escalation hook
+
+become_root_init() initializes the privilege escalation functionality by installing the predefined hook table through fh_install_hooks().
+
+```text
+int __cdecl become_root_init()
+{
+    return fh_install_hooks(hooks, 0xAu);
+}
+```
+
+**Disassembly View:**
+
+![Question 08 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs8-Identify-Privilege-Escalation-Hooks-Disassembly-View.png)
+
+**Step 2** — Trace the installed hooks
+
+Following the hooks structure in IDA reveals the functions associated with the installed hooks. Among them, hook_getuid() is identified as the relevant hook for the privilege escalation logic.
+
+**Disassembly View:**
+
+![Question 08 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs8-Installed-Hooks-Disassembly-View.png)
+
+**Step 3** — Inspect hook_getuid()
+
+Inside hook_getuid(), the code first checks whether the process name is "bash". It then reads the process environment and searches for a specific hardcoded string using strstr().
+
 **Decompiled Pseudocode:**
 
 ```text
@@ -323,6 +352,11 @@ __int64 __fastcall hook_getuid(const pt_regs *regs)
   return orig_getuid(a1: regs);
 }
 ```
+
+**Disassembly View:**
+
+![Question 08 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs8-CTF-Part1-Disassembly-View.png)
+![Question 08 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs8-CTF-Part2-Disassembly-View.png)
 
 ---
 Qs9. How many hooks, in total, does the become_root_init function install to enable privilege escalation?
