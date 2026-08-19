@@ -362,7 +362,20 @@ The hardcoded magic string is stored in the read-only data section (.rodata.str1
 ---
 Qs9. How many hooks, in total, does the become_root_init function install to enable privilege escalation?
 
+**Answer:**
 
+**Finding:** The hooks array is defined as ftrace_hook hooks[10], containing 10 hook entries targeting syscall handlers such as kill, getuid, getpgid, getpgrp, getsid, scheduler-related syscalls, and sysinfo.
+
+```text
+10
+```
+
+**Disassembly View:**
+
+![Question 09 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs8-Installed-Hooks-Disassembly-View.png)
+
+---
+Qs10. What is the hardcoded IPv4 address of the C2 server?
 
 
 
