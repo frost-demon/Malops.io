@@ -249,6 +249,7 @@ Now byte-swap the value to convert it from network byte order:
 ```text
 0xA146 → Byte Swap → 0x46A1 → Decimal → 18081
 ```
+![Hex to Decimal Conversion](Artifacts/Hex-to-Decimal-Conversion.png)
 
 **Disassembly View:**
 
