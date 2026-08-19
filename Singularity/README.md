@@ -355,8 +355,9 @@ __int64 __fastcall hook_getuid(const pt_regs *regs)
 
 **Disassembly View:**
 
-![Question 08 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs8-CTF-Part1-Disassembly-View.png)
-![Question 08 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs8-CTF-Part2-Disassembly-View.png)
+The hardcoded magic string is stored in the read-only data section (.rodata.str1.1) and identified by IDA as needle. The null-terminated string MAGIC=babyelephant is then referenced by hook_getuid() as the search string for the environment-variable check.
+
+![Question 08 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs8-CTF-Disassembly-View.png)
 
 ---
 Qs9. How many hooks, in total, does the become_root_init function install to enable privilege escalation?
