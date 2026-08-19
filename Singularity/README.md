@@ -414,6 +414,11 @@ __int64 __fastcall hooked_tcp4_seq_show(seq_file *seq, void *v)
     return orig_tcp4_seq_show(a1: seq, a2: v);
 }
 ```
+
+**Disassembly View:**
+
+![Question 08 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs7-Disassembly-View.png)
+
 ---
 Qs11. What is the hardcoded port number the C2 server listens on?
 
