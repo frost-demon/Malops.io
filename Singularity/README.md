@@ -364,11 +364,20 @@ Qs9. How many hooks, in total, does the become_root_init function install to ena
 
 **Answer:**
 
-**Finding:** The hooks array is defined as ftrace_hook hooks[10], containing 10 hook entries targeting syscall handlers such as kill, getuid, getpgid, getpgrp, getsid, scheduler-related syscalls, and sysinfo.
-
 ```text
 10
 ```
+
+**Finding:** The become_root_init() routine initializes the privilege-escalation hooks by passing the hooks array to fh_install_hooks(). The second argument, 0xA, specifies the number of hook entries to install. Converting 0xA to decimal gives 10.
+
+```text
+int __cdecl become_root_init()
+{
+    return fh_install_hooks(hooks, 0xAu);
+}
+```
+
+**Verdict:** become_root_init() installs 10 hooks as part of the privilege-escalation functionality.
 
 ---
 Qs10. What is the hardcoded IPv4 address of the C2 server?
