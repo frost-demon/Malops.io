@@ -18,6 +18,8 @@ Qs2. What is the name of the primary initialization function called when the mod
 
 **Answer:**
 
+**Finding:** IDA identifies singularity_init() as the module's primary initialization routine, with init_module listed as its alternative name. The routine orchestrates initialization of the rootkit's individual capabilities.
+
 ```text
 init_module
 ```
@@ -72,6 +74,8 @@ Qs3. How many distinct feature-initialization functions are called within above 
 
 **Answer:**
 
+**Finding:** The initialization routine invokes 15 distinct feature-specific initialization functions, covering functionality such as process, directory, network, syscall, and BPF-related hiding/hooking.
+
 ```text
 15
 ```
@@ -80,6 +84,8 @@ Qs3. How many distinct feature-initialization functions are called within above 
 Qs4. The reset_tainted_init function creates a kernel thread for anti-forensics. What is the hardcoded name of this thread?
 
 **Answer:**
+
+**Finding:** reset_tainted_init() creates a kernel thread through kthread_create_on_node(). The hardcoded thread name passed to the call is "zer0t".
 
 ```text
 zer0t
@@ -135,6 +141,8 @@ Qs5. The add_hidden_pid function has a hardcoded limit. What is the maximum numb
 
 **Answer:**
 
+**Finding:** add_hidden_pid() enforces a maximum hidden-PID count using the comparison cmp ecx, 20h. Since 0x20 = 32, the rootkit can maintain up to 32 hidden PIDs.
+
 ```text
 32
 ```
@@ -182,6 +190,8 @@ Qs6. What is the name of the function called last within init_module to hide the
 
 **Answer:**
 
+**Finding:** module_hide_current() is the final function invoked by singularity_init(), indicating that the rootkit hides its own kernel module after completing feature initialization.
+
 ```text
 module_hide_current
 ```
@@ -194,6 +204,8 @@ module_hide_current
 Qs7. The TCP port hiding module is initialized. What is the hardcoded port number it is configured to hide (decimal)?
 
 **Answer:**
+
+**Finding:** hooked_tcp4_seq_show() compares the TCP port field against 0xA146. Interpreting the value in network byte order results in 0x46A1, which corresponds to decimal port 18081.
 
 ```text
 18081
