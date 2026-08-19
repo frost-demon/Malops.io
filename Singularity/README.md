@@ -422,6 +422,12 @@ __int64 __fastcall hooked_tcp4_seq_show(seq_file *seq, void *v)
 ---
 Qs11. What is the hardcoded port number the C2 server listens on?
 
+**Answer:**
+
+```text
+443
+```
+
 
 
 
