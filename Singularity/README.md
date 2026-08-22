@@ -700,7 +700,6 @@ Qs13. What is the “magic” sequence number that triggers the reverse shell (d
 
 **Findings:**
 
-Finding:
 The hook_icmp_rcv() function compares the ICMP sequence number against the hardcoded value:
 
 **Decompiled Pseudocode:**
@@ -776,7 +775,15 @@ This value is used as one of the conditions required to trigger spawn_revshell()
 ![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part2-Disassembly-View.png)
 
 ---
-Qs14.
+Qs14. When the trigger conditions are met, what is the name of the function queued to execute the reverse shell?
+
+**Answer:**
+
+```text
+spawn_revshell
+```
+
+**Findings:**
 
 
 
