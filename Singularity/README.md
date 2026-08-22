@@ -503,6 +503,9 @@ int __fastcall hook_icmp_rcv(sk_buff *skb)
 }
 ```
 
+**Step 3** — Trace spawn_revshell()
+
+Following spawn_revshell() reveals the reverse-shell command constructed with snprintf(). The command redirects /bin/bash to the hardcoded network endpoint:
 
 
 
