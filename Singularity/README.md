@@ -454,6 +454,14 @@ int __cdecl hiding_icmp_init()
 
 The hook checks incoming ICMP packets for a specific source IP and ICMP characteristics. When the expected packet is received, it schedules spawn_revshell() for execution.
 
+
+**Disassembly View:**
+
+![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part1-Disassembly-View.png)
+![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part2-Disassembly-View.png)
+
+**Decompiled Pseudocode:**
+
 ```text
 int __fastcall hook_icmp_rcv(sk_buff *skb)
 {
