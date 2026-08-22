@@ -434,6 +434,8 @@ Qs11. What is the hardcoded port number the C2 server listens on?
 
 hiding_icmp_init() installs a single hook through fh_install_hooks(). The hooks_9 table points to hook_icmp_rcv(), indicating that incoming ICMP traffic is used as a trigger.
 
+**Decompiled Pseudocode:**
+
 ```text
 int __cdecl hiding_icmp_init()
 {
