@@ -621,7 +621,7 @@ Qs12. What network protocol is hooked to listen for the backdoor trigger?
 **Answer:**
 
 ```text
-443
+icmp
 ```
 
 
