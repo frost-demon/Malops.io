@@ -616,7 +616,14 @@ The /dev/tcp/<IP>/<PORT> construct confirms that the rootkit attempts to establi
 ![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Disassembly-View.png)
 
 ---
-Qs12. 
+Qs12. What network protocol is hooked to listen for the backdoor trigger?
+
+**Answer:**
+
+```text
+443
+```
+
 
 
 
