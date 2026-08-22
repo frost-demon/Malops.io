@@ -598,7 +598,7 @@ void __fastcall spawn_revshell(work_struct *work)
 
 **Disassembly View:**
 
-![Question 11 Disassembly View](Artifacts/)
+![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Disassembly-View.png)
 
 
 
