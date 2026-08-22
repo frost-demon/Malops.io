@@ -441,6 +441,13 @@ int __cdecl hiding_icmp_init()
 }
 ```
 
+**Disassembly View:**
+
+![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-Hooks-Disassembly-View.png)
+
+
+
+
 
 
 
