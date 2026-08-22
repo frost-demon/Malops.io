@@ -432,7 +432,7 @@ Qs11. What is the hardcoded port number the C2 server listens on?
 
 **Step 1** — Identify the ICMP hook
 
-hiding_icmp_init() installs a single hook through fh_install_hooks(). The hooks_9 table points to hook_icmp_rcv(), indicating that incoming ICMP traffic is used as a trigger.
+The hiding_icmp_init() routine initializes the ICMP-based functionality by passing the hooks_9 table to fh_install_hooks() with a count of 1.
 
 **Decompiled Pseudocode:**
 
@@ -443,24 +443,28 @@ int __cdecl hiding_icmp_init()
 }
 ```
 
+The disassembly confirms that hooks_9 is the hook table being installed.
+
 **Disassembly View:**
 
 ![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-Hooks-Disassembly-View.png)
 
-**Step 2** — Trace hook_icmp_rcv()
+**Step 2** — Resolve the Hook Target
+
+Following the hooks_9 reference in IDA reveals a single ftrace_hook entry targeting hook_icmp_rcv(). This establishes hook_icmp_rcv() as the function responsible for processing the intercepted ICMP traffic.
 
 **Disassembly View:**
 
 ![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Disassembly-View.png
 )
 
-The hook checks incoming ICMP packets for a specific source IP and ICMP characteristics. When the expected packet is received, it schedules spawn_revshell() for execution.
+Step 3 — Analyze hook_icmp_rcv()
 
+The ICMP hook checks the incoming packet against several conditions before triggering the payload.
 
-**Disassembly View:**
+Notably, it converts the hardcoded address 192.168.5.128 using in4_pton() and verifies the packet against the expected source address and ICMP values. 
 
-![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part1-Disassembly-View.png)
-![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part2-Disassembly-View.png)
+Once these conditions are satisfied, the function prepares a work item and assigns spawn_revshell as its callback. This provides the pivot from the ICMP trigger to the reverse-shell functionality.
 
 **Decompiled Pseudocode:**
 
@@ -513,9 +517,16 @@ int __fastcall hook_icmp_rcv(sk_buff *skb)
 }
 ```
 
-**Step 3** — Trace spawn_revshell()
+**Disassembly View:**
 
-Following spawn_revshell() reveals the reverse-shell command constructed with snprintf(). The command redirects /bin/bash to the hardcoded network endpoint:
+![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part1-Disassembly-View.png)
+![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part2-Disassembly-View.png)
+
+**Step 4** — Trace spawn_revshell()
+
+Following the spawn_revshell cross-reference leads to the function responsible for constructing and executing the reverse shell.
+
+The disassembly exposes the hardcoded network parameter: 443
 
 **Decompiled Pseudocode:**
 
@@ -598,11 +609,14 @@ void __fastcall spawn_revshell(work_struct *work)
 }
 ```
 
+The /dev/tcp/<IP>/<PORT> construct confirms that the rootkit attempts to establish a TCP connection to the specified endpoint.
+
 **Disassembly View:**
 
 ![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Disassembly-View.png)
 
-
+---
+Qs12. 
 
 
 
