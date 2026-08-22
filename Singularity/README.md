@@ -770,5 +770,13 @@ This value is used as one of the conditions required to trigger spawn_revshell()
 
 ![Hex to Decimal Conversion](Artifacts/Malops-CTF-Singularity-Qs13-Hex-to-Decimal-Conversion.png)
 
+**Disassembly View:**
+
+![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part1-Disassembly-View.png)
+![Question 11 Disassembly View](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part2-Disassembly-View.png)
+
+---
+Qs14.
+
 
 
