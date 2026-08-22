@@ -856,7 +856,7 @@ firefox-updater
 
 **Findings:**
 
-Finding: The spawn_revshell() function constructs the reverse-shell command using snprintf(). The hardcoded string "firefox-updater" is passed to the %s placeholder used by exec -a, which sets the process name exposed through argv[0].
+The spawn_revshell() function constructs the reverse-shell command using snprintf(). The hardcoded string "firefox-updater" is passed to the %s placeholder used by exec -a, which sets the process name exposed through argv[0].
 
 **Decompiled Pseudocode:**
 
