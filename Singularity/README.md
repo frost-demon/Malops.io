@@ -576,6 +576,9 @@ int __cdecl hiding_icmp_init()
 }
 ```
 
+<details>
+<summary>Disassembly View</summary>
+
 ![Qs11 Step 1 — Disassembly view of hiding_icmp_init](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-Hooks-Disassembly-View.png)
 
 </details>
