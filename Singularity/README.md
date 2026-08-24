@@ -583,12 +583,19 @@ int __cdecl hiding_icmp_init()
 
 </details>
 
+</details>
+
 <details>
 <summary>Step 2 — Resolve the hook target</summary>
 
 Following the `hooks_9` table reveals a single `ftrace_hook` entry targeting `hook_icmp_rcv()`, establishing it as the function that processes intercepted ICMP traffic.
 
+<details>
+<summary>Disassembly View</summary>
+
 ![Qs11 Step 2 — Disassembly view resolving hooks_9 to hook_icmp_rcv](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Disassembly-View.png)
+
+</details>
 
 </details>
 
@@ -646,10 +653,13 @@ int __fastcall hook_icmp_rcv(sk_buff *skb)
 }
 ```
 
-**Disassembly View:**
+<details>
+<summary>Disassembly View</summary>
 
 ![Qs11 Step 3 — Disassembly view of hook_icmp_rcv (part 1)](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part1-Disassembly-View.png)
 ![Qs11 Step 3 — Disassembly view of hook_icmp_rcv (part 2)](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part2-Disassembly-View.png)
+
+</details>
 
 </details>
 
@@ -739,9 +749,12 @@ void __fastcall spawn_revshell(work_struct *work)
 
 The `/dev/tcp/<IP>/<PORT>` bash construct confirms the rootkit dials back to the hardcoded C2 endpoint.
 
-**Disassembly View:**
+<details>
+<summary>Disassembly View</summary>
 
 ![Qs11 Step 4 — Disassembly view of spawn_revshell](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Disassembly-View.png)
+
+</details>
 
 </details>
 
@@ -787,14 +800,20 @@ A value of `1` in the IPv4 protocol field identifies **ICMP**. The function then
 <details>
 <summary>Artifacts</summary>
 
-**Tool Usage:**
+<details>
+<summary>Tool Usage</summary>
 
 ![Qs13 — Hex to decimal conversion of the magic ICMP sequence number](Artifacts/Malops-CTF-Singularity-Qs13-Hex-to-Decimal-Conversion.png)
 
-**Disassembly View:**
+</details>
+
+<details>
+<summary>Disassembly View</summary>
 
 ![Qs13 — Disassembly view of hook_icmp_rcv (part 1)](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part1-Disassembly-View.png)
 ![Qs13 — Disassembly view of hook_icmp_rcv (part 2)](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part2-Disassembly-View.png)
+
+</details>
 
 </details>
 
@@ -854,9 +873,12 @@ strstr(haystack: ..., needle: "firefox-updater")
 <details>
 <summary>Artifacts</summary>
 
-**Disassembly View:**
+<details>
+<summary>Disassembly View</summary>
 
 ![Qs15 — Disassembly view of spawn_revshell](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Disassembly-View.png)
+
+</details>
 
 </details>
 
