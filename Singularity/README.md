@@ -350,6 +350,8 @@ __int64 __fastcall hooked_tcp4_seq_show(seq_file *seq, void *v)
 }
 ```
 
+</details>
+
 **Conversion — signed value → unsigned → byte-swap → decimal:**
 
 ```text
@@ -357,11 +359,15 @@ __int64 __fastcall hooked_tcp4_seq_show(seq_file *seq, void *v)
 0xA146 → Byte Swap → 0x46A1 → Decimal → 18081
 ```
 
-**Tool Usage:**
+<details>
+<summary>Tool Usage</summary>
 
 ![Qs7 — Hex to decimal conversion for the hidden port value](Artifacts/Malops-CTF-Singularity-Qs7-Hex-to-Decimal-Conversion.png)
 
-**Disassembly View:**
+</details>
+
+<details>
+<summary>Disassembly View</summary>
 
 ![Qs7 — Disassembly view of hooked_tcp4_seq_show](Artifacts/Malops-CTF-Singularity-Qs7-Disassembly-View.png)
 
