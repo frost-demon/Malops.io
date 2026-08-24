@@ -141,9 +141,9 @@ int __cdecl singularity_init()
   return v13;
 }
 ```
+</details>
 
 <details>
-  
 <summary>Disassembly View</summary>
 
 ![Qs2 — Disassembly view of singularity_init / init_module](Artifacts/Malops-CTF-Singularity-Qs2-Disassembly-View.png)
