@@ -50,7 +50,7 @@ This writeup documents the full static analysis process performed in IDA Pro —
 | # | Question | Answer |
 |---|---|---|
 | Qs1 | SHA256 hash of the sample | `0b8ecdaccf492000f3143fa209481eb9db8c0a29da2b79ff5b7f6e84bb3ac7c8` |
-| Qs2 | Primary initialization function | `init_module` (`singularity_init`) |
+| Qs2 | Primary initialization function | `init_module` |
 | Qs3 | Feature-initialization calls | `15` |
 | Qs4 | Anti-forensics kernel thread name | `zer0t` |
 | Qs5 | Maximum hidden PID limit | `32` |
@@ -142,7 +142,9 @@ int __cdecl singularity_init()
 }
 ```
 
-**Disassembly View:**
+<details>
+  
+<summary>Disassembly View</summary>
 
 ![Qs2 — Disassembly view of singularity_init / init_module](Artifacts/Malops-CTF-Singularity-Qs2-Disassembly-View.png)
 
