@@ -16,7 +16,7 @@ Our primary web server, critical to our daily operations, has been compromised. 
 
 ## Overview
 
-**Singularity** is a Linux Kernel Module (LKM) rootkit analyzed as part of a Malops.io CTF challenge.  It uses ftrace infrastructure to hook core kernel and system functions, allowing it to hide files, processes, and network ports while bypassing advanced endpoint detection and eBPF security tools.
+**Singularity** is a Linux Kernel Module (LKM) rootkit analyzed as part of a Malops.io CTF challenge. It uses ftrace infrastructure to hook core kernel and system functions, allowing it to hide files, processes, and network ports while bypassing advanced endpoint detection and eBPF security tools.
 
 This writeup documents the full static analysis process performed in IDA — from initial triage through decompilation, disassembly, and hex-value conversions — to answer each CTF question with direct evidence from the binary.
 
