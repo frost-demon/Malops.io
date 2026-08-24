@@ -863,7 +863,7 @@ strstr(haystack: ..., needle: "firefox-updater")
 
 ## Tools Used
 
-- **IDA Pro** — disassembly, decompilation (Hex-Rays), cross-reference tracing
+- **IDA** — disassembly, decompilation (Hex-Rays), cross-reference tracing
 - **VirusTotal** — sample hashing / basic properties lookup
 - Manual hex ⇄ decimal / byte-order conversion for network byte-order fields
 
