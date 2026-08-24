@@ -349,7 +349,7 @@ __int64 __fastcall hooked_tcp4_seq_show(seq_file *seq, void *v)
 0xA146 → Byte Swap → 0x46A1 → Decimal → 18081
 ```
 
-**CyberChef Tool Usage:**
+**Tool Usage:**
 
 ![Qs7 — Hex to decimal conversion for the hidden port value](Artifacts/Malops-CTF-Singularity-Qs7-Hex-to-Decimal-Conversion.png)
 
@@ -757,7 +757,7 @@ A value of `1` in the IPv4 protocol field identifies **ICMP**. The function then
 <details>
 <summary>Artifacts</summary>
 
-**CyberChef Tool Usage:**
+**Tool Usage:**
 
 ![Qs13 — Hex to decimal conversion of the magic ICMP sequence number](Artifacts/Malops-CTF-Singularity-Qs13-Hex-to-Decimal-Conversion.png)
 
