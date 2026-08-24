@@ -222,7 +222,10 @@ LABEL_7:
 }
 ```
 
-**Disassembly View:**
+</details>
+
+<details>
+<summary>Disassembly View</summary>
 
 ![Qs4 — Disassembly view of reset_tainted_init](Artifacts/Malops-CTF-Singularity-Qs4-Disassembly-View.png)
 
@@ -277,7 +280,10 @@ LABEL_7:
 }
 ```
 
-**Disassembly View:**
+</details>
+
+<details>
+<summary>Disassembly View</summary>
 
 ![Qs5 — Disassembly view showing the cmp ecx, 20h limit check](Artifacts/Malops-CTF-Singularity-Qs5-Disassembly-View.png)
 
