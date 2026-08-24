@@ -1,6 +1,6 @@
 # Singularity — Linux Kernel Rootkit Analysis
 
-![Singularity-Challenge-Completed](Artifacts/Malops-CTF-Singularity-Challenge-Completed.img)
+![Singularity-Challenge-Completed](Artifacts/Malops-CTF-Singularity-Challenge-Completed.png)
 
 **Malops.io CTF Writeup**
 
