@@ -406,6 +406,8 @@ int __cdecl become_root_init()
 
 </details>
 
+</details>
+
 <details>
 <summary>Step 2 — Trace the installed hooks</summary>
 
