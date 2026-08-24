@@ -399,6 +399,9 @@ int __cdecl become_root_init()
 }
 ```
 
+<details>
+<summary>Disassembly View</summary>
+
 ![Qs8 Step 1 — Disassembly view of become_root_init](Artifacts/Malops-CTF-Singularity-Qs8-Identify-Privilege-Escalation-Hooks-Disassembly-View.png)
 
 </details>
@@ -408,7 +411,12 @@ int __cdecl become_root_init()
 
 Following the `hooks` table in IDA resolves each installed hook. Among them, `hook_getuid()` is the function responsible for the privilege-escalation logic.
 
+<details>
+<summary>Disassembly View</summary>
+
 ![Qs8 Step 2 — Disassembly view of the installed hooks table](Artifacts/Malops-CTF-Singularity-Qs8-Installed-Hooks-Disassembly-View.png)
+
+</details>
 
 </details>
 
@@ -477,9 +485,12 @@ __int64 __fastcall hook_getuid(const pt_regs *regs)
 
 The magic string lives in the read-only data section (`.rodata.str1.1`) and is referenced by `hook_getuid()` as the `strstr()` search needle: `MAGIC=babyelephant`.
 
-**Disassembly View:**
+<details>
+<summary>Disassembly View</summary>
 
 ![Qs8 Step 3 — Disassembly view of hook_getuid showing the MAGIC=babyelephant string reference](Artifacts/Malops-CTF-Singularity-Qs8-CTF-Disassembly-View.png)
+
+</details>
 
 </details>
 
