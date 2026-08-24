@@ -4,7 +4,7 @@
 
 **Malops.io CTF Writeup**
 
-`Category: Malware Analysis / Reverse Engineering`  `Target: Linux Kernel Module (LKM)`  `Tool: IDA Pro`
+`Category: Malware Analysis / Reverse Engineering`  `Target: Linux Kernel Module (LKM)`  `Tool: IDA`
 
 --- 
 
