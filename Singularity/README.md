@@ -798,9 +798,6 @@ A value of `1` in the IPv4 protocol field identifies **ICMP**. The function then
 ```
 
 <details>
-<summary>Artifacts</summary>
-
-<details>
 <summary>Tool Usage</summary>
 
 ![Qs13 — Hex to decimal conversion of the magic ICMP sequence number](Artifacts/Malops-CTF-Singularity-Qs13-Hex-to-Decimal-Conversion.png)
@@ -812,8 +809,6 @@ A value of `1` in the IPv4 protocol field identifies **ICMP**. The function then
 
 ![Qs13 — Disassembly view of hook_icmp_rcv (part 1)](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part1-Disassembly-View.png)
 ![Qs13 — Disassembly view of hook_icmp_rcv (part 2)](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Part2-Disassembly-View.png)
-
-</details>
 
 </details>
 
@@ -871,14 +866,9 @@ strstr(haystack: ..., needle: "firefox-updater")
 ```
 
 <details>
-<summary>Artifacts</summary>
-
-<details>
 <summary>Disassembly View</summary>
 
 ![Qs15 — Disassembly view of spawn_revshell](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Disassembly-View.png)
-
-</details>
 
 </details>
 
