@@ -18,7 +18,7 @@ Our primary web server, critical to our daily operations, has been compromised. 
 
 **Singularity** is a Linux Kernel Module (LKM) rootkit analyzed as part of a Malops.io CTF challenge. It uses ftrace infrastructure to hook core kernel and system functions, allowing it to hide files, processes, and network ports while bypassing advanced endpoint detection and eBPF security tools.
 
-This writeup documents the full static analysis process performed in IDA — from initial triage through decompilation, disassembly, and hex-value conversions — to answer each CTF question with direct evidence from the binary.
+This writeup documents the full static analysis process performed in IDA Pro — from initial triage through decompilation, disassembly, and hex-value conversions — to answer each CTF question with direct evidence from the binary.
 
 **Methodology:** 100% static analysis (no dynamic execution / debugging). Every answer below is backed by decompiled pseudocode and/or a disassembly screenshot captured directly from IDA.
 
@@ -142,8 +142,6 @@ int __cdecl singularity_init()
 }
 ```
 
-![Qs2 — Decompiled pseudocode view of singularity_init in IDA](Artifacts/Malops-CTF-Singularity-Qs2-Decompiled-Psuedocode-View.png)
-
 **Disassembly View:**
 
 ![Qs2 — Disassembly view of singularity_init / init_module](Artifacts/Malops-CTF-Singularity-Qs2-Disassembly-View.png)
@@ -222,8 +220,6 @@ LABEL_7:
 }
 ```
 
-![Qs4 — Decompiled pseudocode view of reset_tainted_init](Artifacts/Malops-CTF-Singularity-Qs4-Decompiled-Psuedocode-View.png)
-
 **Disassembly View:**
 
 ![Qs4 — Disassembly view of reset_tainted_init](Artifacts/Malops-CTF-Singularity-Qs4-Disassembly-View.png)
@@ -278,8 +274,6 @@ LABEL_7:
   }
 }
 ```
-
-![Qs5 — Decompiled pseudocode view of add_hidden_pid](Artifacts/Malops-CTF-Singularity-Qs5-Decompiled-Psuedocode-View.png)
 
 **Disassembly View:**
 
@@ -348,8 +342,6 @@ __int64 __fastcall hooked_tcp4_seq_show(seq_file *seq, void *v)
 }
 ```
 
-![Qs7 — Decompiled pseudocode view of hooked_tcp4_seq_show](Artifacts/Malops-CTF-Singularity-Qs7-Decompiled-Psuedocode-View.png)
-
 **Conversion — signed value → unsigned → byte-swap → decimal:**
 
 ```text
@@ -391,7 +383,6 @@ int __cdecl become_root_init()
 }
 ```
 
-![Qs8 Step 1 — Pseudocode view of become_root_init](Artifacts/Malops-CTF-Singularity-Qs8-Identify-Privilege-Escalation-Hooks-Pseudocode-View.png)
 ![Qs8 Step 1 — Disassembly view of become_root_init](Artifacts/Malops-CTF-Singularity-Qs8-Identify-Privilege-Escalation-Hooks-Disassembly-View.png)
 
 </details>
@@ -467,8 +458,6 @@ __int64 __fastcall hook_getuid(const pt_regs *regs)
   return orig_getuid(a1: regs);
 }
 ```
-
-![Qs8 Step 3 — Decompiled pseudocode view of hook_getuid](Artifacts/Malops-CTF-Singularity-Qs8-CTF-Part1-Decompiled-Pseudocode-View.png)
 
 The magic string lives in the read-only data section (`.rodata.str1.1`) and is referenced by `hook_getuid()` as the `strstr()` search needle: `MAGIC=babyelephant`.
 
@@ -558,7 +547,6 @@ int __cdecl hiding_icmp_init()
 }
 ```
 
-![Qs11 Step 1 — Pseudocode view of hiding_icmp_init](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-Hooks-Decompiled-Psuedocode-View.png)
 ![Qs11 Step 1 — Disassembly view of hiding_icmp_init](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-Hooks-Disassembly-View.png)
 
 </details>
@@ -625,8 +613,6 @@ int __fastcall hook_icmp_rcv(sk_buff *skb)
   return orig_icmp_rcv(a1: skb);
 }
 ```
-
-![Qs11 Step 3 — Decompiled pseudocode view of hook_icmp_rcv](Artifacts/Malops-CTF-Singularity-Qs11-Identify-ICMP-RCV-Hook-Function-Decompiled-Psuedocode-View.png)
 
 **Disassembly View:**
 
@@ -718,8 +704,6 @@ void __fastcall spawn_revshell(work_struct *work)
   kfree(a1: work);
 }
 ```
-
-![Qs11 Step 4 — Decompiled pseudocode view of spawn_revshell](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Decompiled-Psuedocode-View.png)
 
 The `/dev/tcp/<IP>/<PORT>` bash construct confirms the rootkit dials back to the hardcoded C2 endpoint.
 
@@ -836,8 +820,6 @@ strstr(haystack: ..., needle: "firefox-updater")
 <details>
 <summary>Artifacts</summary>
 
-![Qs15 — Decompiled pseudocode view of spawn_revshell](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Decompiled-Psuedocode-View.png)
-
 **Disassembly View:**
 
 ![Qs15 — Disassembly view of spawn_revshell](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Disassembly-View.png)
@@ -863,7 +845,7 @@ strstr(haystack: ..., needle: "firefox-updater")
 
 ## Tools Used
 
-- **IDA** — disassembly, decompilation (Hex-Rays), cross-reference tracing
+- **IDA Pro** — disassembly, decompilation (Hex-Rays), cross-reference tracing
 - **VirusTotal** — sample hashing / basic properties lookup
 - Manual hex ⇄ decimal / byte-order conversion for network byte-order fields
 
