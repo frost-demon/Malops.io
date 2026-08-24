@@ -2,7 +2,6 @@
 
 ![Singularity-Challenge-Completed](Artifacts/Malops-CTF-Singularity-Challenge-Completed.img)
 
-
 **Malops.io CTF Writeup**
 
 `Category: Malware Analysis / Reverse Engineering`  `Target: Linux Kernel Module (LKM)`  `Tool: IDA Pro`
