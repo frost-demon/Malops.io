@@ -790,7 +790,15 @@ A value of `1` in the IPv4 protocol field identifies **ICMP**. The function then
 1999
 ```
 
-**Finding:** `hook_icmp_rcv()` compares the ICMP sequence field against the hardcoded value `0xCF07` (see full listing in [Qs11 Step 3](#qs11-c2-server-port-number)). Since ICMP header fields are stored in network byte order (big-endian), the value must be byte-swapped before conversion:
+**Finding:** `hook_icmp_rcv()` compares the ICMP sequence field against the hardcoded value `0xCF07` (see full listing in [Qs11 Step 3](#qs11-c2-server-port-number)). This comparison is reflected in the disassembly as:
+
+```text
+cmp  word ptr [icmph+6], 0CF07h
+```
+
+The instruction compares the 16-bit ICMP sequence field at offset +6 of the ICMP header against the hardcoded value 0xCF07.
+
+Since ICMP header fields are stored in network byte order (big-endian), the value must be byte-swapped before conversion:
 
 ```text
 0xCF07  →  Byte Swap  →  0x07CF
