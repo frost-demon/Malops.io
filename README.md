@@ -1,7 +1,5 @@
 # Malops.io-Challenges
 
-# MalOps CTF Challenges
-
 Reverse engineering CTF challenges and their solutions.
 
 This repository contains challenge files, analysis, and write-ups for reverse engineering challenges.
