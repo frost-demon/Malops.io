@@ -6,6 +6,8 @@
 
 `Category: Malware Analysis / Reverse Engineering`  `Target: Linux Kernel Module (LKM)`  `Tool: IDA Pro`
 
+**Author Name: Shantanu Umrani**
+
 --- 
 
 ## Scenario
