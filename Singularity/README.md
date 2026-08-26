@@ -876,7 +876,7 @@ strstr(haystack: ..., needle: "firefox-updater")
 <details>
 <summary>Disassembly View</summary>
 
-![Qs15 — Disassembly view of spawn_revshell](Artifacts/Malops-CTF-Singularity-Qs11-Spawn-Revshell-Function-Disassembly-View.png)
+![Qs15 — Disassembly view of spawn_revshell](Artifacts/Malops-CTF-Singularity-Qs15-Reverse-Shell-Spawn-Disassembly-View.png)
 
 </details>
 
