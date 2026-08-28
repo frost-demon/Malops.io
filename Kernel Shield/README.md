@@ -1,3 +1,21 @@
+# Kernel Shield
+
+![Kernel-Shield-Challenge-Completed](Artifacts/Malops-CTF-Kernel-Shield-Challenge-Completed.png)
+
+**Malops.io CTF Writeup**
+
+`Category: Malware Analysis / Reverse Engineering`  `Target: Linux Kernel Module (LKM)`  `Tool: IDA Pro`
+
+**Author Name:** Shantanu Umrani
+
+--- 
+
+## Scenario
+
+Your organization's incident response team has been called in after a devastating ransomware attack encrypted critical servers across the network. During forensic analysis, the team discovered that the ransomware didn't just encrypt files — it first deployed a malicious kernel driver named 'NSecKrnl' to neutralize all endpoint detection and response (EDR) solutions running on the target machines. By operating at the kernel level, the driver was able to intercept process handle operations, strip security tool access rights, and forcefully terminate any protective processes before the ransomware payload executed. Without EDR visibility, the ransomware operated completely undetected. Your task as a malware analyst is to load this kernel driver into IDA Pro and fully reverse engineer its capabilities. Uncover how it initializes, how it evades kernel integrity checks, how it communicates with its usermode ransomware component via IOCTL codes, and how it systematically kills EDR processes. Your findings will be critical to understanding the full attack chain and building detections to prevent future incidents.
+
+---
+
 ## Qs1:
 
 > **Question:** The driver exposes itself to usermode applications under a specific name. What is this name?
