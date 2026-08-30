@@ -5,7 +5,6 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Challenges](https://img.shields.io/badge/challenges-1%2B-orange)](#-challenges)
-[![Frosted with ❄️](https://img.shields.io/badge/Frosted%20with-%E2%9D%84%EF%B8%8F-38bdf8?style=for-the-badge)](https://github.com/shantanuumrani1109)
 
 ---
 
