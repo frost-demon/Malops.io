@@ -25,7 +25,7 @@ The goal is simple: document the journey, not just the flag.
 
 | # | Challenge | Platform | Difficulty | Status | GitHub | Write-up |
 |---:|---|---|---|---|---|---|
-| 1 | **Singularity** | 🐧 Linux | 🔥 Hard | ✅ Solved | [Challenge](https://github.com/shantanuumrani1109/Malops.io/tree/main/Singularity) | [Write-up](https://medium.com/@shantanuumrani1109/singularity-a-modern-linux-kernel-rootkit-malops-io-writeup-series-part-1-dcc0fe4c5f46?sharedUserId=shantanuumrani1109) |
+| 1 | **Singularity** | 🐧 Linux | 🟢 Easy | ✅ Solved | [Challenge](https://github.com/shantanuumrani1109/Malops.io/tree/main/Singularity) | [Write-up](https://medium.com/@shantanuumrani1109/singularity-a-modern-linux-kernel-rootkit-malops-io-writeup-series-part-1-dcc0fe4c5f46?sharedUserId=shantanuumrani1109) |
 | 2 | *Coming soon...* | — | — | ⏳ In progress | — | — |
 
 > **Adding a challenge?** Just append a new row to this table. Keep the numbering sequential and fill in every column so the table stays scannable.
