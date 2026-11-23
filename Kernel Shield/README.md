@@ -121,7 +121,7 @@ NTSTATUS __fastcall sub_14000114C(PDRIVER_OBJECT DriverObject)
 <details>
 <summary>Disassembly View</summary>
 
-![Qs1 — Disassembly view of DriverEntry and the device / symbolic link names](Artifacts/Malops-CTF-Kernel-Shield-Qs1-Disassembly-View.png)
+![Qs1 — Disassembly view of DriverEntry and the device / symbolic link names](Artifacts/Malops-CTF-Kernel-Shield-Qs1-Driver-Object-Disassembly-View.png)
 
 </details>
 
@@ -148,7 +148,7 @@ NTSTATUS __fastcall sub_14000114C(PDRIVER_OBJECT DriverObject)
 <details>
 <summary>Disassembly View</summary>
 
-![Qs2 — Disassembly view of the loader entry Flags OR 0x20](Artifacts/Malops-CTF-Kernel-Shield-Qs2-Disassembly-View.png)
+![Qs2 — Disassembly view of the loader entry Flags OR 0x20](Artifacts/Malops-CTF-Kernel-Shield-Qs1-Driver-Object-Disassembly-View.png)
 
 </details>
 
@@ -175,7 +175,7 @@ This matches the x64 `KLDR_DATA_TABLE_ENTRY` layout, where the 32-bit `Flags` fi
 <details>
 <summary>Disassembly View</summary>
 
-![Qs3 — Disassembly view showing the 0x68 displacement on the loader entry](Artifacts/Malops-CTF-Kernel-Shield-Qs3-Disassembly-View.png)
+![Qs3 — Disassembly view showing the 0x68 displacement on the loader entry](Artifacts/Malops-CTF-Kernel-Shield-Qs1-Driver-Object-Disassembly-View.png)
 
 </details>
 
